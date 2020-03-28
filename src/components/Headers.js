@@ -21,7 +21,11 @@ const Headers = () => {
       <ul>
         {titles.length
           ? titles.map(title => {
-              return <li>{title.name}</li>;
+              return (
+                <li>
+                  <Link to={`/bookmark/${title.id}`}>{title.name}</Link>
+                </li>
+              );
             })
           : null}
       </ul>
