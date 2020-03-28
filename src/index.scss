@@ -1,3 +1,31 @@
-p {
+h3 {
   text-align: center;
+  border: 1px solid black;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.bookmarks-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+
+  .bookmarks-title {
+    display: grid;
+    grid-template-rows: 1fr;
+    border: 1px solid black;
+
+    li {
+      text-align: center;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.5em;
+    }
+  }
+
+  .bookmarks-body {
+    display: grid;
+  }
 }

@@ -1,12 +1,18 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Headers from "./components/Headers";
 
 function App() {
   return (
-    <div className="">
-      <p>Easy Bookmarks</p>
-    </div>
+    <Router>
+      <div className="container">
+        <h3>Easy Bookmarks</h3>
+        <div className="bookmarks-container">
+          <Headers />
+          <h3>body</h3>
+        </div>
+      </div>
+    </Router>
   );
 }
 
