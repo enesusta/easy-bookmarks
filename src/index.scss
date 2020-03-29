@@ -3,26 +3,32 @@ h3 {
   border: 1px solid black;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .container {
   height: 100%;
   width: 80%;
   margin: 0 auto;
   padding: 0;
-  overflow: auto;
 }
 
 .bookmarks-container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  overflow-y: scroll;
+  height: 100%;
+  grid-template-columns: 20% 80%;
+  min-height: 0;
+  min-width: 0;
 
   .bookmarks-title {
     display: grid;
-    grid-template-rows: 1fr;
     grid-row-gap: 0.1rem;
-    border: 1px solid black;
 
     .bookmarks-title-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-rows: minmax(min-content, 25px);
       background-color: #f4f4f4;
       padding: 0.5em;
       text-align: center;
@@ -40,11 +46,19 @@ h3 {
     display: grid;
     grid-template-columns: 1fr;
     text-align: center;
+    max-height: 100%;
+    max-width: 100%;
 
-    a {
-      text-decoration: none;
-      padding: 0.3em;
-      display: inline-block;
+    .bookmarks-body-item {
+      display: grid;
+      grid-template-columns: 1fr;
+
+      a {
+        border: 1px solid black;
+        text-decoration: none;
+        padding: 0.3em;
+        display: inline-block;
+      }
     }
   }
 }

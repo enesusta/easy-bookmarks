@@ -22,7 +22,11 @@ const Body = () => {
       <ul>
         {datas.length
           ? datas.map(e => {
-              return <a href={e.url}>{e.name}</a>;
+              return (
+                <a className="bookmarks-body-item" href={e.url}>
+                  {e.name}
+                </a>
+              );
             })
           : null}
       </ul>
