@@ -4,28 +4,47 @@ h3 {
 }
 
 .container {
+  height: 100%;
   width: 80%;
   margin: 0 auto;
+  padding: 0;
+  overflow: auto;
 }
 
 .bookmarks-container {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  overflow-y: scroll;
 
   .bookmarks-title {
     display: grid;
     grid-template-rows: 1fr;
+    grid-row-gap: 0.1rem;
     border: 1px solid black;
 
-    li {
-      text-align: center;
-      width: 100%;
-      margin: 0 auto;
+    .bookmarks-title-item {
+      background-color: #f4f4f4;
       padding: 0.5em;
+      text-align: center;
+      text-decoration: none;
+      list-style: none;
+      color: black;
+
+      &:hover {
+        color: red;
+      }
     }
   }
 
   .bookmarks-body {
     display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    a {
+      text-decoration: none;
+      padding: 0.3em;
+      display: inline-block;
+    }
   }
 }

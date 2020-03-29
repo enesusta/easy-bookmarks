@@ -17,18 +17,19 @@ const Headers = () => {
   }, []);
 
   return (
-    <div className="bookmarks-titles">
-      <ul>
-        {titles.length
-          ? titles.map(title => {
-              return (
-                <li>
-                  <Link to={`/bookmark/${title.id}`}>{title.name}</Link>
-                </li>
-              );
-            })
-          : null}
-      </ul>
+    <div className="bookmarks-title">
+      {titles.length
+        ? titles.map(title => {
+            return (
+              <Link
+                className="bookmarks-title-item"
+                to={`/bookmark/${title.id}`}
+              >
+                {title.name}
+              </Link>
+            );
+          })
+        : null}
     </div>
   );
 };
