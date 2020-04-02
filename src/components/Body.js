@@ -1,16 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useReducer } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
+import Paginator from "./Paginator";
+
+const initialPage = 0;
+
+const map = {
+  1: state => {
+    return state + 1;
+  },
+  2: state => {
+    return state - 1;
+  }
+};
+
+const reducer = (state, action) => {
+  return map[action.toString()](state);
+};
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+const isArray = data => data.hasOwnProperty("children");
 
 const Body = () => {
-  const [datas, setDatas] = useState([]);
   const { id } = useParams();
+  const [data, setData] = useState([]);
+  // const [page, dispatch] = useReducer(reducer, initialPage);
+  const page = useQuery();
 
   useEffect(() => {
     axios
       .get(`http://localhost:3001/bookmark/${id}`)
       .then(res => {
-        setDatas(res.data);
+        setData(res.data.children);
       })
       .catch(err => {
         console.log(err);
@@ -20,10 +44,26 @@ const Body = () => {
   return (
     <div className="bookmarks-body">
       <ul>
-        {datas.length
-          ? datas.map(e => {
-              return (
-                <a className="bookmarks-body-item" href={e.url}>
+        {data.length
+          ? data.map(e => {
+              return isArray(e) ? (
+                e.children.map(k => {
+                  return isArray(k) ? (
+                    k.children.map(p => {
+                      return (
+                        <a href={p.url} className="bookmarks-body-item">
+                          {p.name}
+                        </a>
+                      );
+                    })
+                  ) : (
+                    <a href={k.url} className="bookmarks-body-item">
+                      {k.name}
+                    </a>
+                  );
+                })
+              ) : (
+                <a href={e.url} className="bookmarks-body-item">
                   {e.name}
                 </a>
               );
@@ -35,17 +75,3 @@ const Body = () => {
 };
 
 export default Body;
-
-/**
- * 
- *  <ul>
-        {datas.length
-          ? datas[0].children.map(e => {
-              console.log(`e is ${e}`);
-
-              return <li key={e.id}>{e.name}</li>;
-            })
-          : null}
-      </ul>
-
- */
