@@ -32,7 +32,7 @@ const Body = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/bookmark/${id}`)
+      .get(`http://localhost:9050/bookmark/${id}`)
       .then(res => {
         setData(res.data.children);
       })
