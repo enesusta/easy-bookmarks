@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  easy-bookmarks:
+    container_name: easy-bookmarks
+    #build: .
+    image: enesusta/easy-bookmarks:0.1
+    ports:
+      - '8000:80'
+    networks: 
+     bookmarks-net:
+       ipv4_address: 172.48.0.100
+
+  easy-bookmarks-server:
+    container_name: easy-bookmarks-server
+    image: enesusta/easy-bookmarks-server:0.1
+    ports: 
+        - '9050:3000'
+    volumes: 
+       - c:/Users/Enes/AppData/Local/Google/Chrome/User Data/Default:/data/json
+    networks: 
+     bookmarks-net:
+      ipv4_address: 172.48.0.101
+
+networks:
+  bookmarks-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.48.0.0/24

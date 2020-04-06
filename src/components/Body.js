@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { useParams, useLocation } from "react-router-dom";
-import axios from "axios";
-import Paginator from "./Paginator";
+import React, { useState, useEffect, useReducer } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import Paginator from './Paginator';
 
 const initialPage = 0;
 
 const map = {
-  1: state => {
+  1: (state) => {
     return state + 1;
   },
-  2: state => {
+  2: (state) => {
     return state - 1;
-  }
+  },
 };
 
 const reducer = (state, action) => {
@@ -22,7 +22,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const isArray = data => data.hasOwnProperty("children");
+const isArray = (data) => data.hasOwnProperty('children');
 
 const Body = () => {
   const { id } = useParams();
@@ -33,37 +33,37 @@ const Body = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:9050/bookmark/${id}`)
-      .then(res => {
+      .then((res) => {
         setData(res.data.children);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, [id]);
 
   return (
-    <div className="bookmarks-body">
+    <div className='bookmarks-body'>
       <ul>
         {data.length
-          ? data.map(e => {
+          ? data.map((e) => {
               return isArray(e) ? (
-                e.children.map(k => {
+                e.children.map((k) => {
                   return isArray(k) ? (
-                    k.children.map(p => {
+                    k.children.map((p) => {
                       return (
-                        <a href={p.url} className="bookmarks-body-item">
+                        <a href={p.url} className='bookmarks-body-item'>
                           {p.name}
                         </a>
                       );
                     })
                   ) : (
-                    <a href={k.url} className="bookmarks-body-item">
+                    <a href={k.url} className='bookmarks-body-item'>
                       {k.name}
                     </a>
                   );
                 })
               ) : (
-                <a href={e.url} className="bookmarks-body-item">
+                <a href={e.url} className='bookmarks-body-item'>
                   {e.name}
                 </a>
               );
