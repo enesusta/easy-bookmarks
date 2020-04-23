@@ -1,5 +1,11 @@
 
+## easy-bookmarks
+---
+
+
 ### What is easy-bookmarks?
+
+![](https://raw.githubusercontent.com/enesusta/assets-host-for-github-pages/assets/easy-bookmarks/easy-bookmarks.gif)
 
 easy-bookmarks allows to easily manage your Google Chrome bookmarks. It is simply an wep-app written with react and nodejs.
 
@@ -46,7 +52,7 @@ services:
     ports:
       - '9050:3000'
     volumes:
-      - c:/Users/Enes/AppData/Local/Google/Chrome/User Data/Default:/data/json #change this
+      - c:/Users/<your-username>/AppData/Local/Google/Chrome/User Data/Default:/data/json #change this
     networks:
       bookmarks-net:
         ipv4_address: 172.48.0.101
