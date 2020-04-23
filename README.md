@@ -7,7 +7,9 @@
 
 ![](https://raw.githubusercontent.com/enesusta/assets-host-for-github-pages/assets/easy-bookmarks/easy-bookmarks.gif)
 
-easy-bookmarks allows to easily manage your Google Chrome bookmarks. It is simply an wep-app written with react and nodejs.
+easy-bookmarks is simply a web application that runs on docker container which written with react and nodejs.
+
+easy-bookmarks allows to easily manage your Google Chrome bookmarks.
 
 The most important thing about easy-bookmarks is that `you have to mount your bookmarks.json file to /app/json location.`
 ---
