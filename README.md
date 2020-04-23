@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### What is easy-bookmarks?
 
-In the project directory, you can run:
+easy-bookmarks allows to easily manage your Google Chrome bookmarks. It is simply an wep-app written with react and nodejs.
 
-### `npm start`
+The most important thing about easy-bookmarks is that `you have to mount your bookmarks.json file to /app/json location.`
+---
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Where are default locations of bookmark.js on different operation systems?
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- It is located on C:/Users/`<your-username>`/AppData/Local/Google/Chrome/User Data/Default on **Windows 10**
 
-### `npm test`
+- It is located on ~/.config/google-chrome/Default on **Ubuntu**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- It is located on $HOME/Library/Application Support/Google/Chrome/Default on **OS X**
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### How can you use it?
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```bash
+curl https://gist.githubusercontent.com/enesusta/ef9f8ca366256c6eecb098beaa7ad445/raw/0d43e3e34a3a4c37ca623f3beaa736034345eb50/docker-compose.yml --output docker-compose.yml
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+docker-compose up -d
+```
 
-### `npm run eject`
+or (**customize setup**)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**create docker-compose.yml**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```yml
+version: '3.1'
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+services:
+  easy-bookmarks:
+    container_name: easy-bookmarks
+    image: enesusta/easy-bookmarks:0.2
+    ports:
+      - '8000:80'
+    networks:
+      bookmarks-net:
+        ipv4_address: 172.48.0.100
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  easy-bookmarks-server:
+    container_name: easy-bookmarks-server
+    image: enesusta/easy-bookmarks-server:0.1
+    ports:
+      - '9050:3000'
+    volumes:
+      - c:/Users/Enes/AppData/Local/Google/Chrome/User Data/Default:/data/json #change this
+    networks:
+      bookmarks-net:
+        ipv4_address: 172.48.0.101
 
-## Learn More
+networks:
+  bookmarks-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.48.0.0/24
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+And `docker-compose up -d` your easy-bookmarks application is ready.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can change ports or networks configurations.
 
-### Code Splitting
+You have to configure `volumes` line according to your OS.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Otherwise it may not work.
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+> It's open source. Feel free.

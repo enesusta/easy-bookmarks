@@ -3,8 +3,7 @@ version: '3.1'
 services:
   easy-bookmarks:
     container_name: easy-bookmarks
-    #build: .
-    image: enesusta/easy-bookmarks:0.1
+    image: enesusta/easy-bookmarks:0.2
     ports:
       - '8000:80'
     networks:

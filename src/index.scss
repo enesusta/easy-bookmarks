@@ -1,6 +1,5 @@
 h3 {
   text-align: center;
-  border: 1px solid black;
 }
 
 * {
@@ -53,11 +52,8 @@ h3 {
       text-decoration: none;
       color: black;
 
-      &:nth-child(odd) {
-        background-color: #eee;
-      }
       &:hover {
-        background-color: burlywood;
+        background-color: #eee;
       }
     }
 
